@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // eslint-disable-next-line
 import Clarifai from 'clarifai';
+import Signin from './components/Signin/Signin';
 import Navigation from './components/Navigation/Navigation';
 import Logo from './components/Logo/Logo';
 import Rank from './components/Rank/Rank';
@@ -20,6 +21,7 @@ class App extends Component {
       input: '',
       ImageUrl: '',
       box: {},
+      route: 'Signin'
     }
   }
   calculateFaceLocation = (data) => {
@@ -48,17 +50,25 @@ class App extends Component {
       .then(response => this.displayFacebox(this.calculateFaceLocation(response)))
       .catch(err => console.log(err))
   }
+  onRouteChange = (route) => {
+    this.setState({ route: 'home' });
+  }
   render() {
     return (
       <div className="App">
         <ParticlesComponent />
         <Navigation />
-        <Logo />
-        <Rank />
-        <ImageLinkForm
-          onInputChange={this.onInputChange}
-          onButtonSubmit={this.onButtonSubmit} />
-        <FaceRecognition box={this.state.box} ImageUrl={this.state.ImageUrl} />
+        {this.state.route === 'Signin'
+          ? <Signin onRouteChange={this.onRouteChange} />
+          : <div>
+            <Logo />
+            <Rank />
+            <ImageLinkForm
+              onInputChange={this.onInputChange}
+              onButtonSubmit={this.onButtonSubmit} />
+            <FaceRecognition box={this.state.box} ImageUrl={this.state.ImageUrl} />
+          </div>
+        }
       </div>
     );
   }
