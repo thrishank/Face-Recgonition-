@@ -12,10 +12,10 @@ const ParticlesComponent = () => {
                         enable: true,
                         mode:"push", 
                 }, 
-                /*  onHover: {
+                /* onHover: {
                     enable: true,
                     mode: "repulse"
-                } */
+                }  */
                 },
                 modes: {
                     push: {
@@ -35,7 +35,7 @@ const ParticlesComponent = () => {
                     speed: {min:1, max:3},
                 },
                 opacity: {
-                    value: {min: 0.3, max: 0.5},
+                    value: {min: 0.1, max: 0.3},
                 },
                 size: {
                     value: {min: 1, max: 3},
